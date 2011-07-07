@@ -1,5 +1,5 @@
 Name:          nodejs
-Version:       0.4.8
+Version:       0.5.0
 Release:       1%{?dist}
 Summary:       Evented I/O for V8 JavaScript
 Group:         Development/Libraries
@@ -57,9 +57,17 @@ done
 %defattr(-, root, root)
 %dir %{_includedir}/node
 %{_includedir}/node/*.h
+%dir %{_includedir}/node/c-ares
+%dir %{_includedir}/node/ev
+%{_includedir}/node/c-ares/*.h
+%{_includedir}/node/ev/*.h
+
 /usr/lib/pkgconfig/nodejs.pc
 
 %changelog
+* Wed Jul 06 2011 Steffen Roegner <steffen@sroegner.org> 0.5.0-1%{?dist}
+- bumping up to unstable 0.5.0
+
 * Sat Jun 25 2011 Steffen Roegner <steffen@sroegner.org> 0.4.8-1%{?dist}
 - initial rpm build
 
