@@ -52,8 +52,6 @@ do
   chmod 755 ${e}
 done
 make DESTDIR=%{buildroot} doc
-#%define doc_tgt %{_builddir}/node-v%{version}/doc
-#dos2unix %{doc_tgt}/api/assets/sh_main.js %{doc_tgt}/*.js
 gzip -9 %{buildroot}/usr/lib/node_modules/npm/man/man?/*
 chmod 755 %{buildroot}/usr/lib/node_modules/npm/scripts/*
 
@@ -80,10 +78,7 @@ chmod 755 %{buildroot}/usr/lib/node_modules/npm/scripts/*
 %dir %{_includedir}/node
 %{_includedir}/node/*
 # /usr/lib/pkgconfig/nodejs.pc
-%docdir doc/api
-%doc doc/api
-%doc doc/*html doc/*css doc/*png doc/*js
-%doc doc/favicon.ico
+%doc doc/api/api/*
 
 %changelog
 * Fri Dec 01 2011 Steffen Roegner <steffen@sroegner.org> 0.6.4-1%{?dist}
