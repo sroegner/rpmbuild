@@ -11,6 +11,7 @@ Vendor:        Xceptance Inc.
 Packager:      Steffen Roegner <steffen@sroegner.org>
 URL:           http://nodejs.org/
 Source:        http://nodejs.org/dist/node-v%{version}.tar.gz
+Patch0:         node-v%{version}-doc.patch
 License:       MIT
 BuildRequires: glibc-devel libgcc openssl-devel libstdc++-devel
 Provides:      /usr/bin/node
@@ -36,9 +37,11 @@ Node Package Manager
 
 %prep
 %setup -q -n node-v%{version}
+./configure --prefix=%{_prefix} --dest-cpu=x64
+
+%patch0
 
 %build
-./configure --prefix=%{_prefix} --dest-cpu=x64
 make -j2
 
 %install
