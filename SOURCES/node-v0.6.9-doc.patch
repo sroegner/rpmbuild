@@ -1,0 +1,9 @@
+--- Makefile	2012-02-01 10:20:53.158037289 -0500
+@@ -99,7 +99,6 @@
+ 	out/doc/close-downloads.png \
+ 	out/doc/community/index.html \
+ 	out/doc/community/not-invented-here.png \
+-	out/doc/logos/index.html \
+ 	out/doc/microsoft-logo.png \
+ 	out/doc/ryan-speaker.jpg \
+ 	out/doc/download-logo.png \

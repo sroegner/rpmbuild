@@ -1,4 +1,4 @@
-%define node_version %(echo "${NODE_VERSION}")
+%define node_version %(echo "${NODEJS_VERSION}")
 # building this inside jenkins will assign the CI build number as the rpm build number
 %define bld_num %(if [ -z "$BUILD_NUMBER" ]; then echo 1; else echo $BUILD_NUMBER; fi)
 
@@ -54,6 +54,15 @@ done
 make DESTDIR=%{buildroot} doc
 gzip -9 %{buildroot}/usr/lib/node_modules/npm/man/man?/*
 chmod 755 %{buildroot}/usr/lib/node_modules/npm/scripts/*
+# keep rpmlint happy
+chmod 644 %{buildroot}/usr/lib/node_modules/npm/bin/npm-get-uid-gid.js
+chmod 644 %{buildroot}/usr/lib/node_modules/npm/bin/read-package-json.js
+chmod 644 %{buildroot}/usr/lib/node_modules/npm/lib/utils/cmd-shim.js
+empty_file=%{buildroot}/usr/lib/node_modules/npm/node_modules/nopt/.npmignore
+if [ -f ${empty_file} ]
+then
+  [ $(/usr/bin/stat -c %s "${empty_file}") -eq 0 ] && rm -f ${empty_file}
+fi
 
 %clean
 [ "%{buildroot}" != / ] && rm -rf "%{buildroot}"
@@ -71,6 +80,7 @@ chmod 755 %{buildroot}/usr/lib/node_modules/npm/scripts/*
 %files npm
 %{_bindir}/npm
 %dir /usr/lib/node_modules
+%exclude /usr/lib/node_modules/npm/test
 /usr/lib/node_modules/*
 
 %files devel
